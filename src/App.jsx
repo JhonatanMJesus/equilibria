@@ -1,12 +1,15 @@
 import './App.css'
 import Header from './Header'
 import Img1 from './img/projeto.jpg'
+import Img2 from './img/img1.jpg'
+import Equipe from './img/equipe.jpg'
+import Img3 from './img/img2.jpg'
 
 function App() {
   return (
     <>
       <Header />
-      <section id='home' className="bg-gradient-to-b from-gray-100 to-white pt-24 pb-8 md:pt-32">
+      <section id='home' className="bg-gradient-to-b from-gray-100 to-white pt-12 pb-6 md:pt-12">
         <div className='principal flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 px-4 py-8'>
           <div className='max-w-md flex flex-col justify-between text-center md:text-left'>
             <div>
@@ -23,7 +26,7 @@ function App() {
               </p>
             </div>
             <div>
-              <a className='inline-block p-3 bg-blue-700 text-white rounded-xl mt-4 text-base md:text-lg hover:bg-blue-800 transition-colors duration-300'>
+              <a href='#contact' className='inline-block p-3 bg-blue-700 text-white rounded-xl mt-4 text-base md:text-lg hover:bg-blue-800 transition-colors duration-300'>
                 Quero conhecer
               </a>
             </div>
@@ -37,9 +40,9 @@ function App() {
       <section className="bg-white py-12 md:py-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="flex flex-wrap justify-center gap-4">
-            <img src="/pictures/img1.jpg" alt="Profissional 1" className="w-42 h-58 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
-            <img src="/pictures/equipe.jpg" alt="Equipe reunida" className="w-42 relative -top-12 h-58 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
-            <img src="/pictures/img2.jpg" alt="Profissional 2" className="w-42 h-58 relative top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
+            <img src={Img2} alt="Profissional 1" className="w-42 h-58 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
+            <img src={Equipe} alt="Equipe reunida" className="w-42 relative -top-12 h-58 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
+            <img src={Img3} alt="Profissional 2" className="w-42 h-58 relative top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-md" />
           </div>
           <div className="max-w-xl text-center lg:text-left mt-8 lg:mt-0">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
