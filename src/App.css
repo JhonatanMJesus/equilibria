@@ -4,11 +4,12 @@
   min-height: 100vh;
 }
 
-.img1{
+/* Consider removing the .img1 max-width if Tailwind handles it. */
+/* .img1 {
   max-width: 240px;
   position: relative;
   top: -10px;
-}
+} */
 
 .img1 {
   will-change: filter;
