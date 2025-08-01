@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-.principal {
+/* .principal {
   min-height: 100vh;
-}
+} */
 
 /* Consider removing the .img1 max-width if Tailwind handles it. */
 /* .img1 {
