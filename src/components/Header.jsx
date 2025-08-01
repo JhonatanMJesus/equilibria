@@ -1,35 +1,69 @@
-import Logo from '/logo.svg'
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import Logo from '/logo.svg';
 
 function Header() {
-  return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow-lg shadow-grey-500/50 z-50">
-      <div className="mx-12 px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 md:h-20 items-center justify-between"> {/* Adjusted height for mobile */}
-          {/* Logo e texto */}
-          <a href="#" className="flex items-center space-x-2 md:space-x-3"> {/* Adjusted spacing for mobile */}
-            <img src={Logo} alt="Logo" className="h-8 w-auto md:h-10" /> {/* Adjusted logo size for mobile */}
-            <div className="flex flex-col">
-              <span className="text-black text-base md:text-lg font-semibold leading-none">Equilibria</span> {/* Adjusted font size for mobile */}
-              <span className="text-black text-xs md:text-sm leading-none">Consultoria</span> {/* Adjusted font size for mobile */}
-            </div>
-          </a>
+  const [menuOpen, setMenuOpen] = useState(false);
 
-          {/* Links de navegação - Hidden on small screens, visible on medium and up */}
-          <nav className="hidden md:flex space-x-4 md:space-x-6"> {/* Adjusted spacing for mobile */}
-            <a href="#home" className="text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 text-sm md:text-base">Início</a> {/* Adjusted font size for mobile */}
-            <a href="#contact" className="text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 text-sm md:text-base">Contato</a> {/* Adjusted font size for mobile */}
+  return (
+    <header className="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
+      <div className="mx-4 sm:mx-6 lg:mx-12 px-2 sm:px-4 lg:px-8">
+        <div className="grid grid-cols-3 h-16 md:h-20 items-center">
+          {/* Coluna 1: Logo à esquerda */}
+          <div className="flex items-center">
+            <a href="#" className="flex items-center space-x-2">
+              <img src={Logo} alt="Logo" className="h-8 w-auto md:h-10" />
+              <div className="flex flex-col leading-none">
+                <span className="text-black text-sm md:text-lg font-semibold">Equilibria</span>
+                <span className="text-black text-xs md:text-sm">Consultoria</span>
+              </div>
+            </a>
+          </div>
+
+          {/* Coluna 2: Navegação centralizada */}
+          <nav className="hidden md:flex justify-center space-x-6">
+            <a href="#home" className="text-gray-700 hover:text-blue-700 text-sm font-medium transition">Início</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-700 text-sm font-medium transition">Contato</a>
           </nav>
 
-          {/* Botão */}
-          <div>
-            <a href="#contact" className="bg-blue-700 hover:bg-blue-500 rounded-md py-2 px-4 md:py-3 md:px-5 text-white text-xs md:text-sm inline-block transition-colors duration-200"> {/* Adjusted padding and font size for mobile */}
+          {/* Coluna 3: Botão à direita */}
+          <div className="hidden md:flex justify-end">
+            <a
+              href="#contact"
+              className="bg-blue-700 hover:bg-blue-500 text-white rounded-md py-2 px-4 text-sm transition"
+            >
+              Agende uma reunião
+            </a>
+          </div>
+
+          {/* Botão menu mobile */}
+          <div className="flex justify-end md:hidden col-span-2">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="text-gray-700">
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Menu Mobile */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t shadow-inner px-4 py-4 space-y-4">
+          <div className="flex justify-center space-x-6">
+            <a href="#home" className="text-gray-700 hover:text-blue-700 text-sm font-medium">Início</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-700 text-sm font-medium">Contato</a>
+          </div>
+          <div className="flex justify-center">
+            <a
+              href="#contact"
+              className="bg-blue-700 hover:bg-blue-500 text-white rounded-md py-2 px-6 text-sm transition"
+            >
               Agende uma reunião
             </a>
           </div>
         </div>
-      </div>
+      )}
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
