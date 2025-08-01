@@ -3,7 +3,7 @@ import Img1 from '../img/projeto.jpg'
 
 const Home = () => {
   return (
-    <section id='home' className="bg-gradient-to-b from-gray-100 to-white mt-18 pt-12 pb-6 md:pt-12">
+    <section id='home' className="bg-gradient-to-b from-gray-100 to-white pt-32 pb-6 md:pt-32">
         <div className='principal flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 px-4 py-8'>
         <div className='max-w-md flex flex-col justify-between text-center md:text-left'>
             <div>
