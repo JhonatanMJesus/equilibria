@@ -1,5 +1,5 @@
-import './App.css'
-import Header from './Header'
+import './css/App.css'
+import Header from './components/Header'
 
 
 import Equipe from './img/equipe.jpg'

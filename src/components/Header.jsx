@@ -3,7 +3,7 @@ import Logo from '/logo.svg'
 function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow-lg shadow-grey-500/50 z-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-12 px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 md:h-20 items-center justify-between"> {/* Adjusted height for mobile */}
           {/* Logo e texto */}
           <a href="#" className="flex items-center space-x-2 md:space-x-3"> {/* Adjusted spacing for mobile */}
