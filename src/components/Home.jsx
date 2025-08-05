@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <section id='home' className="bg-gradient-to-b from-gray-100 to-white pt-32 pb-24 md:pt-32">
         <div className='container-default flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 py-8'>
-            <div className='max-w-md flex flex-col justify-between text-center md:text-left'>
+            <div className='max-w-md flex flex-col text-center md:text-left'>
             <div>
                 <span className='inline-block border rounded-2xl p-1 mb-4 text-sm md:text-base'>
                 Sua saúde mental é nossa prioridade
@@ -30,6 +30,7 @@ const Home = () => {
             </div>
         </div>
     </section>
+
   )
 }
 

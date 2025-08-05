@@ -17,18 +17,24 @@ export default defineConfig({
             addUtilities({
               '.container-default': {
                 width: '100%',
-                'max-width': '80rem', // 1280px (equivalente ao max-w-7xl)
+                'max-width': '80rem', // max-w-7xl
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                paddingLeft: '1rem', // px-4
+                paddingLeft: '1rem',  // px-4
                 paddingRight: '1rem',
+                paddingTop: '2rem',   // Ajuste mais espaço superior
+                paddingBottom: '2rem', // Ajuste mais espaço inferior
                 '@screen sm': {
                   paddingLeft: '1.5rem', // sm:px-6
                   paddingRight: '1.5rem',
+                  paddingTop: '3rem',
+                  paddingBottom: '3rem',
                 },
                 '@screen lg': {
-                  paddingLeft: '3rem', // lg:px-12
+                  paddingLeft: '12rem',  // lg:px-12
                   paddingRight: '3rem',
+                  paddingTop: '4rem',
+                  paddingBottom: '4rem',
                 },
               },
             })
