@@ -6,9 +6,9 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
-      <div className="mx-4 sm:mx-6 lg:mx-12 px-2 sm:px-4 lg:px-8">
-        <div className="grid grid-cols-3 h-16 md:h-20 items-center">
+      <header className="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
+        <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid grid-cols-3 h-16 md:h-20 items-center">
           {/* Coluna 1: Logo à esquerda */}
           <div className="flex items-center">
             <a href="#" className="flex items-center space-x-2">
