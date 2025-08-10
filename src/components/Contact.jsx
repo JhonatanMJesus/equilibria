@@ -2,7 +2,7 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-12 md:py-16 px-4 bg-[var(--azul-serenity)]">
+    <section id="contact" className="py-24 md:py-32 px-4 bg-[var(--azul-serenity)]">
       <div className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-[var(--azul-profundo)]">
           Entre em contato
