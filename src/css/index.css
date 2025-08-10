@@ -18,7 +18,7 @@ body {
 
 h1 {
   font-size: 3.2em;
-  line-height: 0.8;
+  line-height: 0.9;
 }
 
 .bg-verde {
@@ -29,3 +29,6 @@ h1 {
   background-color: #5CB5C4;
 }
 
+.gradiente {
+  background: radial-gradient(circle, #1B3A57, #0f2434);
+}

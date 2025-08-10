@@ -1,0 +1,25 @@
+:root {
+  --azul-profundo: #1B3A57;
+  --azul-serenity: #A7C6ED;
+  --verde-menta: #A8D5BA;
+  --cinza-neutro: #F5F5F5;
+  --dourado-suave: #D4AF37;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--cinza-neutro);
+  color: var(--azul-profundo);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
