@@ -20,3 +20,12 @@ h1 {
   font-size: 3.2em;
   line-height: 0.8;
 }
+
+.bg-verde {
+  background-color: #2B8695;
+}
+
+.bg-verde-hover:hover {
+  background-color: #5CB5C4;
+}
+

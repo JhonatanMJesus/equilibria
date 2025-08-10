@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import Logo from '/logo.svg';
+import Logo from '/logo-update.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,15 +24,16 @@ function Header() {
           <nav className="hidden md:flex justify-center space-x-6">
             <a href="#home" className="text-gray-700 hover:text-blue-700 text-sm font-medium transition">Início</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-700 text-sm font-medium transition">Contato</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-700 text-sm font-medium transition">Já sou cliente</a>
           </nav>
 
           {/* Coluna 3: Botão à direita */}
           <div className="hidden md:flex justify-end">
-            <a
-              href="#contact"
-              className="bg-blue-700 hover:bg-blue-500 text-white rounded-md py-2 px-4 text-sm transition"
-            >
+            <a href="#contact" className="bg-verde bg-verde-hover text-white rounded-md py-2 px-4 text-sm transition">
               Agende uma reunião
+            </a>
+            <a href="#contact" className="bg-verde bg-verde-hover text-white rounded-md py-2 px-4 text-sm transition">
+              Já sou Cliente
             </a>
           </div>
 
