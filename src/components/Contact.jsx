@@ -30,13 +30,13 @@ const Contact = () => {
             <label htmlFor="cargo" className="mb-1 font-medium text-[var(--azul-profundo)] text-sm md:text-base">
               Cargo*
             </label>
-            <input type="text" id="cargo" name="cargo" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base" />
+            <input type="text" id="cargo" name="cargo" required className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base" />
           </div>
           <div className="flex flex-col">
             <label htmlFor="funcionarios" className="mb-1 font-medium text-[var(--azul-profundo)] text-sm md:text-base">
-              Quantidade de funcionários:
+              Quantidade de funcionários:*
             </label>
-            <select id="funcionarios" name="funcionarios" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
+            <select id="funcionarios" name="funcionarios" required className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
               <option disabled hidden selected value="">Selecione uma opção</option>
               <option value="autonomo">Autônomo</option>
               <option value="2-10">2-10</option>
@@ -52,13 +52,13 @@ const Contact = () => {
             <label htmlFor="empresa" className="mb-1 font-medium text-[var(--azul-profundo)] text-sm md:text-base">
               Empresa*
             </label>
-            <input type="text" id="empresa" name="empresa" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base" />
+            <input type="text" id="empresa" name="empresa" required className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base" />
           </div>
           <div className="flex flex-col md:col-span-2">
             <label htmlFor="mensagem" className="mb-1 font-medium text-[var(--azul-profundo)] text-sm md:text-base">
               Gostaria de nos deixar uma mensagem?
             </label>
-            <textarea className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
+            <textarea id="mensagem" name="mensagem" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
             </textarea>
           </div>
           <div className="md:col-span-2 text-center">
