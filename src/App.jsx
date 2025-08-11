@@ -7,6 +7,7 @@ import Img2 from './img/img1.jpg'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Services from './components/Services'
+import Statements from './components/Statements'
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       <Header />
       <Home />
 
-      <section className="container-default bg-[var(--cinza-neutro)] py-24 md:py-32 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+      <section className="bg-[var(--cinza-neutro)] py-24 md:py-32 px-4">
+        <div className="container-default max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
           
           <div className="flex flex-wrap justify-center gap-4">
             <img
@@ -57,6 +58,8 @@ function App() {
       </section>
 
       <Services />
+
+      <Statements />
 
       <Contact />
 

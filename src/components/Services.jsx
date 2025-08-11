@@ -48,13 +48,33 @@ const Services = () => {
           <p className="max-w-md pt-2">
             Explicação breve sobre a psicologia que ela trabalha e os serviços...
           </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center bg-[var(--azul-profundo)] p-2 mt-2 rounded-4xl text-[var(--dourado-suave)] font-semibold hover:underline text-base md:text-lg"
+          >
+            Conheça nosso trabalho
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="ml-2 h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
 
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             {videos.map((video) => (
               <button
                 key={video.id}
                 onClick={() => openModal(video)}
-                className="w-36 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg border-4 border-[var(--azul-serenity)] overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] transform transition duration-300 ease-in-out hover:scale-105 relative group"
+                className="w-36 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:scale-145 relative group hover:z-50"
               >
                 <img src={video.thumb} alt={video.alt} className="w-full h-full object-cover" />
 
