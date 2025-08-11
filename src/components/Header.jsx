@@ -44,16 +44,15 @@ function Header() {
 
       {menuOpen && (
         <div className="md:hidden bg-[var(--azul-profundo)] text-white border-t shadow-inner px-4 py-4 space-y-4">
-          <div className="flex justify-center space-x-6">
-            <a href="#home" className="hover:text-[var(--dourado-suave)] text-sm font-medium">Início</a>
-            <a href="#contact" className="hover:text-[var(--dourado-suave)] text-sm font-medium">Contato</a>
-          </div>
-          <div className="flex justify-center">
-            <a
-              href="#contact"
-              className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition"
-            >
+          <div className="flex flex-col space-y-4 text-center">
+            <a href="#home" className="hover:text-[var(--dourado-suave)] text-base font-medium">Início</a>
+            <a href="#contact" className="hover:text-[var(--dourado-suave)] text-base font-medium">Contato</a>
+            <a href="#services" className="hover:text-[var(--dourado-suave)] text-base font-medium">Serviços</a>
+            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition">
               Agende uma reunião
+            </a>
+            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition">
+              Já sou Cliente
             </a>
           </div>
         </div>

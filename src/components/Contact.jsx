@@ -37,7 +37,7 @@ const Contact = () => {
               Quantidade de funcionários:*
             </label>
             <select id="funcionarios" name="funcionarios" required className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
-              <option disabled hidden selected value="">Selecione uma opção</option>
+              <option disabled hidden value="">Selecione uma opção</option>
               <option value="autonomo">Autônomo</option>
               <option value="2-10">2-10</option>
               <option value="11-50">11-50</option>
@@ -58,11 +58,10 @@ const Contact = () => {
             <label htmlFor="mensagem" className="mb-1 font-medium text-[var(--azul-profundo)] text-sm md:text-base">
               Gostaria de nos deixar uma mensagem?
             </label>
-            <textarea id="mensagem" name="mensagem" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
-            </textarea>
+            <textarea id="mensagem" name="mensagem" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base"></textarea>
           </div>
           <div className="md:col-span-2 text-center">
-            <button type="submit" className="mt-4 md:mt-6 px-8 py-3 bg-[var(--verde-menta)] text-[var(--azul-profundo)] font-semibold rounded-xl hover:bg-[var(--dourado-suave)] hover:text-white transition-all duration-300 text-base md:text-lg">
+            <button type="submit" className="mt-4 md:mt-6 px-8 py-3 w-full sm:w-auto bg-[var(--verde-menta)] text-[var(--azul-profundo)] font-semibold rounded-xl hover:bg-[var(--dourado-suave)] hover:text-white transition-all duration-300 text-base md:text-lg">
               Enviar
             </button>
           </div>

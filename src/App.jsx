@@ -27,17 +27,17 @@ function App() {
             <img
               src={Equipe}
               alt="Equipe reunida"
-              className="w-36 h-52 relative -top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+              className="w-36 h-52 md:relative md:-top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
             />
             <img
               src={Img3}
               alt="Profissional 2"
-              className="w-36 h-52 relative -top-6 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+              className="w-36 h-52 md:relative md:-top-6 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
             />
           </div>
 
           <div className="max-w-xl text-center lg:text-left mt-8 lg:mt-0">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--azul-profundo)] leading-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--azul-profundo)] leading-tight mb-4">
               Melhore o ambiente <br className="hidden md:block" />e aumente a produtividade
             </h2>
             <p className="text-gray-700 mb-6 text-base md:text-lg">

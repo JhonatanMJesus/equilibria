@@ -42,15 +42,15 @@ const Services = () => {
 
   return (
     <section id="services" className="bg-[var(--azul-serenity)]">
-      <div className="container-default flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 py-32">
-        <div className="flex flex-col text-center md:text-center justify-center items-center">
-          <h1>Titulo para mostrar os vídeos</h1>
-          <p className="max-w-md pt-2">
+      <div className="container-default flex flex-col items-center justify-center gap-8 py-24 sm:py-32">
+        <div className="flex flex-col text-center justify-center items-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--azul-profundo)]">Título para mostrar os vídeos</h1>
+          <p className="max-w-md pt-2 text-sm sm:text-base">
             Explicação breve sobre a psicologia que ela trabalha e os serviços...
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center bg-[var(--azul-profundo)] p-2 mt-2 rounded-4xl text-[var(--dourado-suave)] font-semibold hover:underline text-base md:text-lg"
+            className="inline-flex items-center bg-[var(--azul-profundo)] p-2 mt-4 rounded-3xl text-[var(--dourado-suave)] font-semibold hover:underline text-base md:text-lg"
           >
             Conheça nosso trabalho
             <svg
@@ -74,16 +74,16 @@ const Services = () => {
               <button
                 key={video.id}
                 onClick={() => openModal(video)}
-                className="w-36 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:scale-145 relative group hover:z-50"
+                className="w-36 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out md:hover:scale-145 relative group hover:z-50"
               >
                 <img src={video.thumb} alt={video.alt} className="w-full h-full object-cover" />
 
                 <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-                    <div className="flex items-center justify-center w-14 h-14 bg-white bg-opacity-90 rounded-full shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-[var(--azul-profundo)]" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-                        </svg>
-                    </div>
+                  <div className="flex items-center justify-center w-14 h-14 bg-white bg-opacity-90 rounded-full shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-[var(--azul-profundo)]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
+                    </svg>
+                  </div>
                 </div>
               </button>
             ))}
@@ -103,7 +103,7 @@ const Services = () => {
           ></div>
 
           <div
-            className="bg-white rounded-lg max-w-3xl w-full mx-4 p-4 relative z-10 transform transition-all duration-300 scale-100"
+            className="bg-white rounded-lg w-full max-w-lg sm:max-w-2xl mx-4 p-4 relative z-10 transform transition-all duration-300 scale-100"
           >
             <button
               onClick={closeModal}
