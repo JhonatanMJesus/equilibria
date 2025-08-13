@@ -13,8 +13,8 @@ function Header() {
             <a href="#" className="flex items-center space-x-2">
               <img src={Logo} alt="Logo" className="h-8 w-auto md:h-10" />
               <div className="flex flex-col leading-none">
-                <span className="text-white text-sm md:text-lg font-semibold">Equilibria</span>
-                <span className="text-white text-xs md:text-sm">Consultoria</span>
+                <span className="text-white text-sm md:text-lg font-semibold">Equilíbria</span>
+                <span className="text-white text-xs md:text-sm">Soluções</span>
               </div>
             </a>
           </div>
