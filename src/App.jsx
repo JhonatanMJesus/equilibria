@@ -8,61 +8,72 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Services from './components/Services'
 import Statements from './components/Statements'
+import FadeInSection from './components/FadeInSection'
 
 function App() {
   return (
     <>
       <Header />
-      <Home />
+      <FadeInSection>
+        <Home />
+      </FadeInSection>
 
-      <section className="bg-[var(--cinza-neutro)] py-24 md:py-32 px-4">
-        <div className="container-default max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            <img
-              src={Img2}
-              alt="Profissional 1"
-              className="w-36 h-52 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
-            />
-            <img
-              src={Equipe}
-              alt="Equipe reunida"
-              className="w-36 h-52 md:relative md:-top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
-            />
-            <img
-              src={Img3}
-              alt="Profissional 2"
-              className="w-36 h-52 md:relative md:-top-6 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
-            />
+      <FadeInSection>
+        <section className="bg-[var(--cinza-neutro)] py-24 md:py-32 px-4">
+          <div className="container-default max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+            
+            <div className="flex flex-wrap justify-center gap-4">
+              <img
+                src={Img2}
+                alt="Profissional 1"
+                className="w-36 h-52 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+              />
+              <img
+                src={Equipe}
+                alt="Equipe reunida"
+                className="w-36 h-52 md:relative md:-top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+              />
+              <img
+                src={Img3}
+                alt="Profissional 2"
+                className="w-36 h-52 md:relative md:-top-6 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+              />
+            </div>
+
+            <div className="max-w-xl text-center lg:text-left mt-8 lg:mt-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--azul-profundo)] leading-tight mb-4">
+                Melhore o ambiente <br className="hidden md:block" />e aumente a produtividade
+              </h2>
+              <p className="text-gray-700 mb-6 text-base md:text-lg">
+                Etiam condimentum duis molestie malesuada volutpat pellentesque sed.
+                Ornare suspendisse ut ac neque lobortis sed tincidunt. Mi tempus quis massa tellus imperdiet aenean nulla id.
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex items-center text-[var(--azul-profundo)] font-semibold hover:underline text-base md:text-lg"
+              >
+                Solicite um orçamento
+                <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
           </div>
+        </section>
+      </FadeInSection>
 
-          <div className="max-w-xl text-center lg:text-left mt-8 lg:mt-0">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--azul-profundo)] leading-tight mb-4">
-              Melhore o ambiente <br className="hidden md:block" />e aumente a produtividade
-            </h2>
-            <p className="text-gray-700 mb-6 text-base md:text-lg">
-              Etiam condimentum duis molestie malesuada volutpat pellentesque sed.
-              Ornare suspendisse ut ac neque lobortis sed tincidunt. Mi tempus quis massa tellus imperdiet aenean nulla id.
-            </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center text-[var(--azul-profundo)] font-semibold hover:underline text-base md:text-lg"
-            >
-              Solicite um orçamento
-              <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
+      <FadeInSection>
+        <Services />
+      </FadeInSection>
 
-      <Services />
+      <FadeInSection>
+        <Statements />
+      </FadeInSection>
 
-      <Statements />
-
-      <Contact />
-
+      <FadeInSection>
+        <Contact />
+      </FadeInSection>
+      
       <a
         href="https://wa.me/5514996596500?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
         target="_blank"
