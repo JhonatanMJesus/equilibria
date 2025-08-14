@@ -13,18 +13,17 @@ const Services = () => {
   const closeButtonRef = useRef(null);
 
   useEffect(() => {
-    // Usando axios para buscar os vídeos
-    axios.get(`${API_URL}/videos`)
-      .then(res => {
-        setVideos(res.data);
-      })
-      .catch(err => {
-        console.error("Erro ao carregar vídeos:", err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  axios.get(`${API_URL}/videos`)
+    .then(res => {
+      setVideos(res.data.videos || []);
+    })
+    .catch(err => {
+      console.error("Erro ao carregar vídeos:", err);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
 
   function openModal(video) {
     setVideoSelected(video);
