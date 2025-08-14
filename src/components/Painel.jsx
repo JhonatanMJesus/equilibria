@@ -6,8 +6,8 @@ const API_URL = "https://equilibria-backend.onrender.com";
 
 const Painel = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [username, setUsername] = useState("Andreza"); // Valor inicial para facilitar o teste
-  const [password, setPassword] = useState("Equilibria2025$"); // Valor inicial para facilitar o teste
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
