@@ -9,20 +9,26 @@ const Painel = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [files, setFiles] = useState([]);
-  const [previews, setPreviews] = useState([]);
+  const [videos, setVideos] = useState([null, null, null]); // 3 slots de vídeo
   const [loading, setLoading] = useState(false);
 
-  // Limpa os previews quando os arquivos são removidos ou alterados
-  useEffect(() => {
-    if (files.length > 0) {
-      const objectUrls = Array.from(files).map(file => URL.createObjectURL(file));
-      setPreviews(objectUrls);
-      return () => objectUrls.forEach(url => URL.revokeObjectURL(url));
-    } else {
-      setPreviews([]);
+  // Busca os vídeos atuais do backend
+  const fetchVideos = async () => {
+    if (!token) return;
+    try {
+      const res = await axios.get(`${API_URL}/videos`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      // Supondo que o backend retorne uma lista de URLs [video1, video2, video3]
+      setVideos((prev) => res.data.videos || [null, null, null]);
+    } catch (error) {
+      console.error("Erro ao buscar vídeos:", error);
     }
-  }, [files]);
+  };
+
+  useEffect(() => {
+    fetchVideos();
+  }, [token]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,19 +37,20 @@ const Painel = () => {
       localStorage.setItem("token", res.data.token);
       setToken(res.data.token);
       alert("Login bem-sucedido!");
+      fetchVideos(); // já busca vídeos ao logar
     } catch (error) {
       alert("Erro no login. Verifique as credenciais.");
       console.error(error);
     }
   };
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
+  const handleUpload = async (file, index) => {
     if (!token) return alert("Você precisa estar logado para enviar vídeos.");
-    if (!files || files.length !== 3) return alert("Selecione exatamente 3 vídeos.");
+    if (!file) return;
 
     const formData = new FormData();
-    Array.from(files).forEach(file => formData.append("videos", file));
+    formData.append("video", file); // envio individual
+    formData.append("index", index); // para o backend saber qual substituir
 
     try {
       setLoading(true);
@@ -53,10 +60,10 @@ const Painel = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Vídeos enviados com sucesso!");
-      setFiles([]);
+      alert("Vídeo enviado com sucesso!");
+      fetchVideos(); // atualiza a lista
     } catch (error) {
-      alert(`Erro no upload: ${error.message || "Verifique se o backend está rodando e se você está logado."}`);
+      alert(`Erro no upload: ${error.message || "Verifique o backend."}`);
       console.error(error);
     } finally {
       setLoading(false);
@@ -66,11 +73,9 @@ const Painel = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken("");
-    setFiles([]);
-    setPreviews([]);
+    setVideos([null, null, null]);
   };
 
-  // LOGIN
   if (!token) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-600 to-indigo-500 font-sans">
@@ -79,11 +84,7 @@ const Painel = () => {
           className="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-sm text-center transform transition duration-500 scale-95 hover:scale-100"
         >
           <div className="mb-6">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="mx-auto w-20 h-20 rounded-full shadow-md"
-            />
+            <img src={Logo} alt="Logo" className="mx-auto w-20 h-20 rounded-full shadow-md" />
           </div>
           <h2 className="text-3xl font-bold text-gray-700 mb-8">Painel de Login</h2>
 
@@ -122,7 +123,7 @@ const Painel = () => {
     );
   }
 
-  // PAINEL DE UPLOAD
+  // PAINEL DE UPLOAD INDIVIDUAL
   return (
     <div className="min-h-screen bg-gray-100 p-6 font-sans">
       <div className="flex justify-between items-center mb-6">
@@ -135,46 +136,48 @@ const Painel = () => {
         </button>
       </div>
 
-      <form onSubmit={handleUpload} className="bg-white rounded-xl shadow-lg p-6 max-w-lg mx-auto mb-6">
-        <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:border-indigo-500 transition">
-          <FaUpload className="text-indigo-600 text-4xl mb-3" />
-          <span className="text-gray-600 mb-2">Selecione 3 vídeos</span>
-          <input
-            type="file"
-            multiple
-            accept="video/*"
-            onChange={(e) => setFiles(e.target.files)}
-            className="hidden"
-          />
-        </label>
+      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {videos.map((video, idx) => {
+          const [previews, setPreviews] = useState([]);
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={`mt-4 w-full py-3 rounded-lg text-white font-semibold transition ${
-            loading ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"
-          }`}
-        >
-          {loading ? "Enviando..." : "Enviar Vídeos"}
-        </button>
-      </form>
+          const handleFileChange = (e) => {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
 
-      {previews.length > 0 && (
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4">Pré-visualização dos vídeos selecionados:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {previews.map((src, idx) => (
-              <video
-                key={idx}
-                src={src}
-                controls
-                className="w-full rounded-lg shadow-md border border-gray-200"
-              />
-            ))}
-          </div>
-          <p className="mt-2 text-gray-600">{files.length} arquivo(s) selecionado(s)</p>
-        </div>
-      )}
+            const urls = files.map(file => URL.createObjectURL(file));
+            setPreviews(urls);
+          };
+
+          return (
+            <div key={idx} className="bg-white p-4 rounded-lg shadow-lg text-center">
+              {previews.length > 0 ? (
+                previews.map((src, i) => (
+                  <video key={i} src={src} controls className="w-full rounded-md mb-2" />
+                ))
+              ) : video ? (
+                <video src={video.url} controls className="w-full rounded-md mb-3" />
+              ) : (
+                <div className="w-full h-40 bg-gray-200 flex items-center justify-center rounded-md mb-3">
+                  <span className="text-gray-500">Sem vídeo</span>
+                </div>
+              )}
+
+              <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-3 cursor-pointer hover:border-indigo-500 transition">
+                <FaUpload className="text-indigo-600 text-3xl mb-2" />
+                <span className="text-gray-600 mb-1">Substituir vídeo</span>
+                <input
+                  type="file"
+                  accept="video/*"
+                  multiple
+                  onChange={handleFileChange}
+                  className="hidden"
+                  disabled={loading}
+                />
+              </label>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
