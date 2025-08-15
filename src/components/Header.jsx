@@ -6,15 +6,15 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-[var(--azul-profundo)] text-white shadow-lg z-50">
+    <header className="fixed top-0 left-0 w-full bg-[var(--cinza-neutro)] text-[var(--azul-profundo)] shadow-lg z-50">
       <div className="container-default">
         <div className="grid grid-cols-3 h-16 md:h-20 items-center">
           <div className="flex items-center">
             <a href="#" className="flex items-center space-x-2">
               <img src={Logo} alt="Logo" className="h-8 w-auto md:h-10" />
               <div className="flex flex-col leading-none">
-                <span className="text-white text-sm md:text-lg font-semibold">Equilíbria</span>
-                <span className="text-white text-xs md:text-sm">Soluções</span>
+                <span className="text-[var(--azul-profundo)] text-sm md:text-lg font-semibold">Equilíbria</span>
+                <span className="text-[var(--azul-profundo)] text-xs md:text-sm">Soluções</span>
               </div>
             </a>
           </div>
