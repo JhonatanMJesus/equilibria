@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Exemplo de dados de depoimentos
 const testimonials = [
   {
     id: 1,
