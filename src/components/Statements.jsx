@@ -1,5 +1,4 @@
 import React from 'react';
-import Picture1 from '../img/Alessandra.png'
 
 // Exemplo de dados de depoimentos
 const testimonials = [
@@ -8,7 +7,7 @@ const testimonials = [
     name: "Alessandra Rampinelli",
     role: "CEO",
     company: "Papemax",
-    photo: {Picture1},
+    photo: "/img/foto.jpg",
     text: "A consultoria da Equilibria transformou a cultura da nossa empresa. Resultados consistentes e equipe motivada!"
   }
 ];
