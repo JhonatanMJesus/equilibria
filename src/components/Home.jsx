@@ -11,7 +11,7 @@ const Home = () => {
               Quando o líder cresce, toda a empresa prospera
             </span>
             <h1 className='text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 leading-tight'>
-              Equilibria: saúde, <br className="hidden sm:block" /> liderança e performance em sintonia
+              Equilíbria: saúde, <br className="hidden sm:block" /> liderança e performance em sintonia
             </h1>
           </div>
           <div className='flex-grow flex items-center justify-center md:justify-start'>
