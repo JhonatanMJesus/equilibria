@@ -11,12 +11,12 @@ const Home = () => {
               Quando o líder cresce, toda a empresa prospera
             </span>
             <h1 className='text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 leading-tight'>
-              Equilibria: onde pessoas <br className="hidden sm:block" /> e resultados caminham juntas
+              Equilibria: saúde, <br className="hidden sm:block" /> liderança e performance em sintonia
             </h1>
           </div>
           <div className='flex-grow flex items-center justify-center md:justify-start'>
             <p className='text-[var(--cinza-neutro)] text-base md:text-lg'>
-              Ajudamos líderes a construírem empresas mentalmente saudáveis, emocionalmente inteligentes e obter resultados sustentáveis.
+              Capacitamos líderes para inspirarem, mativarem e potencializarem o talento de seus colaboradores, fortalecendo a produtividade e a cultura organizacional das empresas
             </p>
           </div>
           <div>
@@ -26,7 +26,27 @@ const Home = () => {
           </div>
         </div>
         <div className='flex justify-center w-full'>
-          <img src={Img1} alt="Projeto" className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl h-auto rounded-lg shadow-lg" />
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl bg-gray-200 rounded-lg shadow-xl overflow-hidden">
+            <div className="bg-gray-100 px-4 py-3 flex items-center gap-2 border-b border-gray-300">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <div className="flex-1 mx-4">
+                <div className="bg-white rounded-md px-3 py-1 text-xs text-gray-600 border border-gray-300">
+                  https://equilibriasolucoes.com.br/
+                </div>
+              </div>
+            </div>
+            <div className="bg-white">
+              <img 
+                src={Img1} 
+                alt="Projeto" 
+                className="w-full h-auto block" 
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

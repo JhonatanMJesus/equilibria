@@ -46,9 +46,9 @@ const LandingPage = () => {
                         Melhore o ambiente <br className="hidden md:block" /> e aumente a produtividade
                         </h2>
                         <p className="text-gray-700 mb-6 text-base md:text-lg">
-                        Etiam condimentum duis molestie malesuada volutpat pellentesque sed.
-                        Ornare suspendisse ut ac neque lobortis sed tincidunt. Mi tempus quis massa
-                        tellus imperdiet aenean nulla id.
+                        Acreditamos que o equilíbrio entre mente, corpo e ambiente profissional é essencial para o sucesso nas organizações.
+                        Atuamos de forma preventiva e personalizada para transformar a cultura corporativa em um espaço mais humano, empático
+                        e sustentável.
                         </p>
                         <a
                         href="#contact"

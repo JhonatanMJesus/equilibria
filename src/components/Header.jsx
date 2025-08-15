@@ -26,10 +26,10 @@ function Header() {
           </nav>
 
           <div className="hidden md:flex justify-end space-x-3">
-            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            <a href="#contact" className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
               Agende uma reunião
             </a>
-            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            <a href="#contact" className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
               Já sou Cliente
             </a>
           </div>
