@@ -1,5 +1,4 @@
 import React from 'react'
-// Componentes da landing page
 import FadeInSection from './FadeInSection';
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,6 +10,7 @@ import Contact from "./Contact";
 import Equipe from "../img/equipe.jpg";
 import Img3 from "../img/img2.jpg";
 import Img2 from "../img/img1.jpg";
+import Explain from './Explain';
 
 const LandingPage = () => {
   return (
@@ -70,6 +70,10 @@ const LandingPage = () => {
 
         <FadeInSection>
             <Statements />
+        </FadeInSection>
+
+        <FadeInSection>
+            <Explain />
         </FadeInSection>
 
         <FadeInSection>
