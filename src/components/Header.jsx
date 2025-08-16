@@ -20,7 +20,7 @@ function Header() {
           </div>
 
           <nav className="hidden md:flex justify-center space-x-6">
-            <a href="#home" className="hover:text-[var(--dourado-suave)] text-sm font-medium transition">Início</a>
+            <a href="/" className="hover:text-[var(--dourado-suave)] text-sm font-medium transition">Início</a>
             <a href="#contact" className="hover:text-[var(--dourado-suave)] text-sm font-medium transition">Contato</a>
             <a href="#services" className="hover:text-[var(--dourado-suave)] text-sm font-medium transition">Serviços</a>
           </nav>
