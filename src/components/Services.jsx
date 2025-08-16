@@ -111,12 +111,12 @@ const Services = () => {
                   <button
                     key={video.id} // Usando o ID único gerado
                     onClick={() => openModal(video)}
-                    className="w-42 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden relative group transition-transform duration-200 hover:scale-105 hover:border-2 hover:border-[var(--azul-profundo)]"
+                    className="w-42 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden relative group transition-transform duration-200 hover:scale-105"
                     title={`Reproduzir vídeo ${video.index + 1}`}
                   >
                     <video 
                       src={video.url} 
-                      className="w-full h-full object-cover" 
+                      className="w-full h-full object-cover hover:border-2 hover:border-[var(--azul-profundo)]" 
                       muted 
                       preload="metadata" // Melhora o carregamento
                       onError={(e) => {
