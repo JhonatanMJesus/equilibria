@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 // Alterado para a porta correta da API
-const API_URL = "https://equilibria-backend.onrender.com";
+const API_URL = "https://equilibria-backend-tmoo.onrender.com";
 
 const Services = () => {
   const [modalOpen, setModalOpen] = useState(false);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaUserAlt, FaLock, FaUpload } from "react-icons/fa";
 import Logo from "../img/logo-update.png";
 
-const API_URL = "https://equilibria-backend.onrender.com";
+const API_URL = "https://equilibria-backend-tmoo.onrender.com";
 
 const Painel = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
