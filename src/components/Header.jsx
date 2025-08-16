@@ -35,7 +35,7 @@ function Header() {
           </div>
 
           <div className="flex justify-end md:hidden col-span-2">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="text-white">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="text-[var(--azul-profundo)]">
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
