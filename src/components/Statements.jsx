@@ -1,4 +1,5 @@
 import React from 'react';
+import Statement1 from '../img/Alessandra.jpeg'
 
 const testimonials = [
   {
@@ -6,7 +7,7 @@ const testimonials = [
     name: "Alessandra Rampinelli",
     role: "CEO",
     company: "Papemax",
-    photo: "/img/foto.jpg",
+    photo: "../img/Alessandra.jpeg",
     text: "A consultoria da Equilibria transformou a cultura da nossa empresa. Resultados consistentes e equipe motivada!"
   }
 ];
@@ -29,7 +30,7 @@ const Statements = () => {
               className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-full max-w-sm"
             >
               <img
-                src={t.photo}
+                src={Statement1}
                 alt={t.name}
                 className="w-24 h-24 rounded-full object-cover mb-4"
               />
