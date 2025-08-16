@@ -22,11 +22,11 @@ const Statements = () => {
           Veja o que líderes e profissionais dizem sobre a nossa consultoria e os resultados alcançados.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-8">
+        <div className="flex flex-wrap justify-center gap-8 w-full mt-8">
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300"
+              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-full max-w-sm"
             >
               <img
                 src={t.photo}
