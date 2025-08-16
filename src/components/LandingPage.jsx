@@ -22,22 +22,22 @@ const LandingPage = () => {
       
         <FadeInSection>
             <section className="bg-[var(--cinza-neutro)] py-24 md:py-32 px-4">
-                <div className="container-default max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div className="container-default min-h-[100%] max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
                     <div className="flex flex-wrap justify-center gap-4">
                         <img
                         src={Img2}
                         alt="Profissional 1"
-                        className="w-36 h-52 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+                        className="w-36 h-52 md:w-40 md:h-80 object-cover rounded-3xl shadow-lg"
                         />
                         <img
                         src={Equipe}
                         alt="Equipe reunida"
-                        className="w-36 h-52 md:relative md:-top-12 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+                        className="w-36 h-52 md:relative md:-top-12 md:w-40 md:h-80 object-cover rounded-3xl shadow-lg"
                         />
                         <img
                         src={Img3}
                         alt="Profissional 2"
-                        className="w-36 h-52 md:relative md:-top-6 md:w-40 md:h-60 object-cover rounded-3xl shadow-lg"
+                        className="w-36 h-52 md:relative md:-top-6 md:w-40 md:h-80 object-cover rounded-3xl shadow-lg"
                         />
                     </div>
 
