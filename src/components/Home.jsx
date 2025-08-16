@@ -16,7 +16,7 @@ const Home = () => {
           </div>
           <div className='flex-grow flex items-center justify-center md:justify-start'>
             <p className='text-[var(--cinza-neutro)] text-base md:text-lg'>
-              Capacitamos líderes para inspirarem, mativarem e potencializarem o talento de seus colaboradores, fortalecendo a produtividade e a cultura organizacional das empresas
+              Capacitamos líderes para inspirarem, motivarem e potencializarem o talento de seus colaboradores, fortalecendo a produtividade e a cultura organizacional das empresas
             </p>
           </div>
           <div>
