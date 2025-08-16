@@ -80,7 +80,7 @@ const LandingPage = () => {
             <Contact />
         </FadeInSection>
         <a
-        href="https://wa.me/5514996596500?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
+        href="https://wa.me/5514988291968?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-4 right-4 md:bottom-6 md:right-6 flex items-center bg-[#25D366] hover:bg-[var(--dourado-suave)] text-white px-4 py-2 md:px-5 md:py-3 rounded-full shadow-lg transition-all duration-300 group z-50 text-sm md:text-base"
