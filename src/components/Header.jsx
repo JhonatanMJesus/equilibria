@@ -5,6 +5,32 @@ import Logo from '/logo-update.png';
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const handleClientClick = (e) => {
+    e.preventDefault();
+    // Navegar para a seção de contato com o parâmetro para ativar o formulário "Já sou cliente"
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+      // Adicionar parâmetro à URL para ativar o formulário correto
+      window.history.pushState({}, '', '#contact?form=cliente');
+      // Disparar evento customizado para notificar o componente Contact
+      window.dispatchEvent(new CustomEvent('activateClientForm'));
+    }
+  };
+
+  const handleMeetingClick = (e) => {
+    e.preventDefault();
+    // Navegar para a seção de contato com o formulário padrão
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+      // Garantir que o formulário padrão esteja ativo
+      window.history.pushState({}, '', '#contact');
+      // Disparar evento customizado para notificar o componente Contact
+      window.dispatchEvent(new CustomEvent('activateInterestForm'));
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full bg-[var(--cinza-neutro)] text-[var(--azul-profundo)] shadow-lg z-50">
       <div className="container-default">
@@ -26,12 +52,18 @@ function Header() {
           </nav>
 
           <div className="hidden md:flex justify-end space-x-3">
-            <a href="#contact" className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            <button 
+              onClick={handleMeetingClick}
+              className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition cursor-pointer"
+            >
               Agende uma reunião
-            </a>
-            <a href="#contact" className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            </button>
+            <button 
+              onClick={handleClientClick}
+              className="bg-[var(--azul-profundo)] text-white rounded-md py-2 px-4 text-sm hover:bg-[var(--dourado-suave)] hover:text-white transition cursor-pointer"
+            >
               Já sou Cliente
-            </a>
+            </button>
           </div>
 
           <div className="flex justify-end md:hidden col-span-2">
@@ -48,12 +80,18 @@ function Header() {
             <a href="#home" className="hover:text-[var(--dourado-suave)] text-base font-medium">Início</a>
             <a href="#contact" className="hover:text-[var(--dourado-suave)] text-base font-medium">Contato</a>
             <a href="#services" className="hover:text-[var(--dourado-suave)] text-base font-medium">Serviços</a>
-            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            <button 
+              onClick={handleMeetingClick}
+              className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition cursor-pointer"
+            >
               Agende uma reunião
-            </a>
-            <a href="#contact" className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition">
+            </button>
+            <button 
+              onClick={handleClientClick}
+              className="bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-md py-2 px-6 text-base hover:bg-[var(--dourado-suave)] hover:text-white transition cursor-pointer"
+            >
               Já sou Cliente
-            </a>
+            </button>
           </div>
         </div>
       )}
