@@ -27,18 +27,20 @@ const Statements = () => {
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-max max-w-max"
+              className="bg-white rounded-xl shadow-lg p-6 flex items-start gap-6 hover:scale-105 transition-transform duration-300 w-full max-w-4xl"
             >
               <img
                 src={Statement1}
                 alt={t.name}
-                className="w-24 h-24 rounded-full object-cover mb-4"
+                className="w-24 h-24 rounded-full object-cover flex-shrink-0"
               />
-              <h3 className="text-xl font-semibold text-[var(--azul-profundo)]">{t.name}</h3>
-              <p className="text-[var(--dourado-suave)] text-sm mb-2">
-                {t.role} - {t.company}
-              </p>
-              <p className="text-[var(--cinza-escuro)] text-base">{t.text}</p>
+              <div className="flex flex-col text-left">
+                <h3 className="text-xl font-semibold text-[var(--azul-profundo)] mb-1">{t.name}</h3>
+                <p className="text-[var(--dourado-suave)] text-sm mb-4">
+                  {t.role} - {t.company}
+                </p>
+                <p className="text-[var(--cinza-escuro)] text-base leading-relaxed">{t.text}</p>
+              </div>
             </div>
           ))}
         </div>
