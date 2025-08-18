@@ -8,7 +8,7 @@ const testimonials = [
     role: "CEO",
     company: "Papemax",
     photo: "../img/Alessandra.jpeg",
-    text: "A consultoria da Equilibria transformou a cultura da nossa empresa. Resultados consistentes e equipe motivada!"
+    text: "O treinamento de saúde mental na Papemax foi uma experiência transformadora para nossa equipe. Muitas vezes, o dia a dia de trabalho nos faz esquecer de olhar para nós mesmos, e o treinamento trouxe ferramentas práticas para lidar com o estresse, melhorar a comunicação e fortalecer o bem-estar. Percebi que, depois das atividades, os colaboradores ficaram mais engajados, motivados e abertos a conversar sobre suas dificuldades. Investir em saúde mental não é apenas cuidar do indivíduo, mas também fortalecer a empresa como um todo. Esse treinamento mostrou que, quando apoiamos uns aos outros, conseguimos crescer juntos."
   }
 ];
 
