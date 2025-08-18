@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-// Alterado para a porta correta da API
 const API_URL = "https://equilibria-backend-tmoo.onrender.com";
 
 const Services = () => {
@@ -14,45 +13,27 @@ const Services = () => {
   const closeButtonRef = useRef(null);
 
   useEffect(() => {
-    axios.get(`${API_URL}/videos`)
-      .then(res => {
-        console.log("Resposta da API:", res.data); // Para debug
-        
-        // A resposta vem em res.data.videos e é um array de 3 posições
+    axios
+      .get(`${API_URL}/videos`)
+      .then((res) => {
         const videosArray = res.data?.videos || [];
-        
-        // Filtrar apenas vídeos válidos (não null) e com URL
         const validVideos = videosArray
-          .map((video, index) => {
-            // Se o vídeo existe e tem URL, adiciona o índice para identificação
-            if (video && video.url && typeof video.url === 'string') {
-              return {
-                ...video,
-                index, // Adiciona o índice original (0, 1, 2)
-                id: `video-${index}` // ID único para o key do React
-              };
-            }
-            return null;
-          })
-          .filter(video => video !== null); // Remove vídeos null/undefined
-        
-        console.log("Vídeos válidos processados:", validVideos);
+          .map((video, index) =>
+            video && video.url
+              ? { ...video, index, id: `video-${index}` }
+              : null
+          )
+          .filter(Boolean);
         setVideos(validVideos);
-        setError(null);
       })
-      .catch(err => {
-        console.error("Erro ao carregar vídeos:", err);
+      .catch(() => {
         setError("Erro ao carregar vídeos. Tente novamente mais tarde.");
-        setVideos([]); // Garantir que videos seja sempre um array
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, []);
 
   function openModal(video) {
-    // Verificação adicional antes de abrir o modal
-    if (video && video.url) {
+    if (video?.url) {
       setVideoSelected(video);
       setModalOpen(true);
       setTimeout(() => setFadeIn(true), 10);
@@ -67,125 +48,98 @@ const Services = () => {
     }, 300);
   }
 
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape" && modalOpen) closeModal();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen]);
-
   return (
-    <section id="services" className="bg-[var(--azul-serenity)]">
+    <section id="services" className="relative bg-[var(--azul-serenity)]">
       <div className="container-default flex flex-col items-center justify-center gap-8 py-24 sm:py-32">
-        <div className="flex flex-col text-center justify-center items-center">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--azul-profundo)]">
-            Equilíbria: desenvolvendo pessoas e multiplicando resultados
-          </h1>
+        {/* Título com gradiente */}
+        <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-[var(--azul-profundo)] to-[var(--azul-serenity)] bg-clip-text text-transparent text-center">
+          Equilíbria: desenvolvendo pessoas e multiplicando resultados
+        </h1>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 border-2 border-[var(--azul-profundo)] border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-[var(--azul-profundo)]">Carregando vídeos...</p>
-              </div>
-            ) : error ? (
-              <div className="text-center">
-                <p className="text-red-600 mb-2">{error}</p>
-                <button 
-                  onClick={() => window.location.reload()} 
-                  className="text-[var(--azul-profundo)] underline hover:no-underline"
-                >
-                  Tentar novamente
-                </button>
-              </div>
-            ) : videos.length > 0 ? (
-              videos.map((video) => {
-                // Verificação adicional no map
-                if (!video || !video.url) {
-                  console.warn(`Vídeo inválido:`, video);
-                  return null;
-                }
-                
-                return (
-                  <button
-                    key={video.id} // Usando o ID único gerado
-                    onClick={() => openModal(video)}
-                    className="w-42 h-52 md:w-40 md:h-60 rounded-3xl shadow-lg overflow-hidden relative group transition-transform duration-200 hover:scale-105"
-                    title={`Reproduzir vídeo ${video.index + 1}`}
-                  >
-                    <video 
-                      src={video.url} 
-                      className="w-full h-full object-cover hover:border-2 hover:border-[var(--azul-profundo)]" 
-                      muted 
-                      preload="metadata" // Melhora o carregamento
-                      onError={(e) => {
-                        console.error("Erro ao carregar vídeo:", video.url, e);
-                      }}
-                    />
-                    <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-                      <div className="flex items-center justify-center w-14 h-14 bg-white bg-opacity-90 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-200">
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className="h-7 w-7 text-[var(--azul-profundo)] ml-1" 
-                          fill="currentColor" 
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    {/* Overlay com hover effect */}
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-200"></div>
-                  </button>
-                );
-              }).filter(Boolean) // Remove itens null do array
-            ) : (
-              <div className="text-center">
-                <p className="text-[var(--azul-profundo)] mb-2">
-                  Nenhum vídeo disponível no momento.
-                </p>
-                <p className="text-sm text-gray-600">
-                  Novos conteúdos em breve!
-                </p>
-              </div>
-            )}
-          </div>
+        {/* Lista de vídeos */}
+        <div className="flex flex-wrap justify-center gap-6 mt-10">
+          {loading ? (
+            <div className="flex items-center gap-2 text-[var(--azul-profundo)]">
+              <div className="w-6 h-6 border-2 border-[var(--azul-profundo)] border-t-transparent rounded-full animate-spin"></div>
+              <p>Carregando vídeos...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center">
+              <p className="text-red-600 mb-2">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-[var(--azul-profundo)] underline hover:no-underline"
+              >
+                Tentar novamente
+              </button>
+            </div>
+          ) : videos.length > 0 ? (
+            videos.map((video) => (
+              <button
+                key={video.id}
+                onClick={() => openModal(video)}
+                className="relative w-40 h-60 md:w-48 md:h-72 rounded-3xl overflow-hidden shadow-lg bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              >
+                {/* Pré-visualização do vídeo */}
+                <video
+                  src={video.url}
+                  className="w-full h-full object-cover"
+                  muted
+                  preload="metadata"
+                />
+
+                {/* Overlay e botão de play */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center">
+                  <div className="w-14 h-14 flex items-center justify-center bg-white/90 rounded-full shadow-lg transition-transform duration-200 group-hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-7 w-7 text-[var(--azul-profundo)] ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            ))
+          ) : (
+            <div className="text-center text-[var(--azul-profundo)]">
+              <p className="mb-1">Nenhum vídeo disponível no momento.</p>
+              <p className="text-sm text-gray-600">Novos conteúdos em breve!</p>
+            </div>
+          )}
         </div>
       </div>
 
+      {/* Modal */}
       {modalOpen && videoSelected && (
-        <div 
+        <div
           className={`fixed inset-0 flex justify-center items-center z-50 transition-opacity duration-300 ${
             fadeIn ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div 
-            className="absolute inset-0 bg-black bg-opacity-70" 
+          {/* Fundo escuro */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={closeModal}
-            aria-label="Fechar modal"
           ></div>
-          <div className="bg-white rounded-lg w-full max-w-lg sm:max-w-2xl mx-4 p-4 relative z-10">
-            <button 
-              onClick={closeModal} 
-              ref={closeButtonRef} 
-              className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold z-20 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Fechar vídeo"
+
+          {/* Player */}
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg sm:max-w-2xl mx-4 p-4 relative z-10 transform transition-all duration-300 scale-95 opacity-0 animate-[fadeZoomIn_0.3s_forwards]">
+            <button
+              onClick={closeModal}
+              ref={closeButtonRef}
+              className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 transition"
             >
               &times;
             </button>
-            {videoSelected.url && (
-              <video 
-                src={videoSelected.url} 
-                controls 
-                autoPlay 
-                className="w-full rounded-lg"
-                onError={(e) => {
-                  console.error("Erro ao reproduzir vídeo:", videoSelected.url, e);
-                }}
-              />
-            )}
+            <video
+              src={videoSelected.url}
+              controls
+              autoPlay
+              className="w-full rounded-xl shadow-md"
+            />
           </div>
         </div>
       )}
