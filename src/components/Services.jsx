@@ -75,22 +75,22 @@ const Services = () => {
       {/* Modal */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
           onClick={() => setSelectedVideo(null)}
         >
           <div
-            className="relative w-full max-w-4xl flex justify-center items-center"
+            className="relative w-full h-full flex justify-center items-center"
             onClick={(e) => e.stopPropagation()} // evita fechamento ao clicar no vídeo
           >
             <video
               src={selectedVideo}
               controls
               autoPlay
-              className="max-h-[80vh] max-w-full rounded-xl shadow-lg object-contain"
+              className="max-w-full max-h-full rounded-xl shadow-lg object-contain"
             />
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg"
+              className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg"
             >
               Fechar
             </button>
