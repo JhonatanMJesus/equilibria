@@ -27,7 +27,7 @@ const Statements = () => {
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-full max-w-sm"
+              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-max max-w-max"
             >
               <img
                 src={Statement1}

@@ -45,7 +45,7 @@ const Explain = () => {
 
   return (
     <section className="bg-white py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="container-default max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Conteúdo Esquerdo */}
           <div className="space-y-6">
