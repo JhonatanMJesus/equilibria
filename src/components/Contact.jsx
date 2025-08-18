@@ -16,6 +16,7 @@ const Contact = () => {
     dataPreferencia: '',
     horarioPreferencia: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [focusedField, setFocusedField] = useState(null);
 
@@ -60,6 +61,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  setIsSubmitting(true);
 
   try {
     const response = await fetch("https://back-form-fpvg.onrender.com/contato", {
@@ -69,13 +71,13 @@ const Contact = () => {
       },
       body: JSON.stringify({
         ...formData,
-        formType: activeForm // informa se é 'interesse' ou 'cliente'
+        formType: activeForm, // envia se é interesse ou cliente
       }),
     });
 
     const data = await response.json();
     if (response.ok) {
-      alert(data.mensagem); // mensagem de sucesso vinda da API
+      alert(data.mensagem);
       setFormData({
         nome: "",
         email: "",
@@ -86,7 +88,7 @@ const Contact = () => {
         mensagem: "",
         tipoServico: "",
         dataPreferencia: "",
-        horarioPreferencia: ""
+        horarioPreferencia: "",
       });
     } else {
       alert(data.mensagem || "Erro ao enviar formulário.");
@@ -94,8 +96,11 @@ const Contact = () => {
   } catch (error) {
     console.error("Erro ao enviar:", error);
     alert("Erro de conexão. Tente novamente.");
+  } finally {
+    setIsSubmitting(false);
   }
 };
+
 
   return (
     <section id="contact" className="py-24 md:py-32 px-4 bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)]">
@@ -547,13 +552,28 @@ const Contact = () => {
             <div className="text-center pt-6">
               <button 
                 type="submit" 
-                className="group relative px-12 py-4 bg-[var(--azul-profundo)] text-white font-bold rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 text-lg overflow-hidden"
+                disabled={isSubmitting}
+                className={`group relative px-12 py-4 font-bold rounded-2xl shadow-lg text-lg overflow-hidden transition-all duration-300 ${
+                  isSubmitting
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : "bg-[var(--azul-profundo)] text-white hover:shadow-2xl transform hover:-translate-y-1"
+                }`}
               >
-                <span className="relative z-10 group-hover:text-[var(--azul-profundo)] transition-colors duration-300">
-                  {activeForm === 'interesse' ? 'Solicitar Proposta' : 'Agendar Sessão'}
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--verde-menta)] to-[var(--dourado-suave)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Enviando...</span>
+                  </div>
+                ) : (
+                  <span className="relative z-10 group-hover:text-[var(--azul-profundo)] transition-colors duration-300">
+                    {activeForm === "interesse" ? "Solicitar Proposta" : "Agendar Sessão"}
+                  </span>
+                )}
+                {!isSubmitting && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--verde-menta)] to-[var(--dourado-suave)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                )}
               </button>
+
             </div>
           </form>
         </div>
