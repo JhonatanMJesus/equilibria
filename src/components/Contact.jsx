@@ -58,11 +58,44 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aqui você pode adicionar a lógica de envio do formulário
-    console.log('Dados do formulário:', formData);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("https://back-form-fpvg.onrender.com/contato", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+        formType: activeForm // informa se é 'interesse' ou 'cliente'
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.mensagem); // mensagem de sucesso vinda da API
+      setFormData({
+        nome: "",
+        email: "",
+        whatsapp: "",
+        cargo: "",
+        funcionarios: "",
+        empresa: "",
+        mensagem: "",
+        tipoServico: "",
+        dataPreferencia: "",
+        horarioPreferencia: ""
+      });
+    } else {
+      alert(data.mensagem || "Erro ao enviar formulário.");
+    }
+  } catch (error) {
+    console.error("Erro ao enviar:", error);
+    alert("Erro de conexão. Tente novamente.");
+  }
+};
 
   return (
     <section id="contact" className="py-24 md:py-32 px-4 bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)]">
