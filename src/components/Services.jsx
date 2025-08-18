@@ -28,7 +28,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-gray-900 to-black text-white py-12 px-4">
+    <section className="relative w-full bg-[var(--azul-profundo)] md:bg-gradient-to-r from-[var(--azul-profundo)] to-[var(--azul-serenity)] text-white py-12 px-4">
       {/* Container */}
       <div className="max-w-6xl mx-auto text-center">
         {/* Título */}
