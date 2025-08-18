@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "https://equilibria-backend-tmoo.onrender.com"; // ajuste para a URL do seu backend
+const API_URL = "https://equilibria-backend-tmoo.onrender.com";
 
 const Services = () => {
   const [videos, setVideos] = useState([]);
@@ -13,8 +13,6 @@ const Services = () => {
       .get(`${API_URL}/videos`)
       .then((res) => {
         const data = res.data;
-        // Se o backend retornar { videos: [...] }
-        // ou retornar um array puro [...]
         const lista = Array.isArray(data) ? data : data.videos || [];
         setVideos(lista);
       })
@@ -22,16 +20,21 @@ const Services = () => {
         console.error("Erro ao carregar vídeos:", err);
         setVideos([]);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Fechar modal com ESC
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setSelectedVideo(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
     <section className="relative w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
-      {/* Container */}
       <div className="max-w-6xl mx-auto text-center">
-        {/* Título */}
         <h2 className="text-4xl font-bold mb-6 text-[var(--azul-profundo)] drop-shadow-lg">
           Serviços em Destaque
         </h2>
@@ -39,11 +42,12 @@ const Services = () => {
           Confira alguns dos nossos serviços através de vídeos demonstrativos.
         </p>
 
-        {/* Área dos Vídeos */}
         {loading ? (
           <p className="text-[var(--azul-profundo)]">Carregando vídeos...</p>
         ) : videos.length === 0 ? (
-          <p className="text-[var(--azul-profundo)]">Nenhum vídeo disponível no momento.</p>
+          <p className="text-[var(--azul-profundo)]">
+            Nenhum vídeo disponível no momento.
+          </p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
             {videos.map((video, index) => (
@@ -61,7 +65,6 @@ const Services = () => {
                   onMouseEnter={(e) => e.target.play()}
                   onMouseLeave={(e) => e.target.pause()}
                 />
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
               </div>
             ))}
@@ -69,19 +72,21 @@ const Services = () => {
         )}
       </div>
 
-      {/* Modal de Visualização */}
+      {/* Modal */}
       {selectedVideo && (
         <div
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedVideo(null)}
         >
-          <div className="relative w-full max-w-4xl">
+          <div
+            className="relative w-full max-w-4xl flex justify-center items-center"
+            onClick={(e) => e.stopPropagation()} // evita fechamento ao clicar no vídeo
+          >
             <video
               src={selectedVideo}
               controls
               autoPlay
-              className="w-full max-h-[80vh] max-w-full rounded-xl shadow-lg object-contain"
-              onClick={(e) => e.stopPropagation()}
+              className="max-h-[80vh] max-w-full rounded-xl shadow-lg object-contain"
             />
             <button
               onClick={() => setSelectedVideo(null)}
