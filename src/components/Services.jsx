@@ -76,11 +76,11 @@ const Services = () => {
       {selectedVideo && (
         <div
           className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
-          onClick={() => setSelectedVideo(null)}
+          onClick={() => setSelectedVideo(null)} // clique fora fecha
         >
           <div
             className="relative w-full h-full flex justify-center items-center"
-            onClick={(e) => e.stopPropagation()} // evita fechamento ao clicar no vídeo
+            onClick={(e) => e.stopPropagation()} // clique dentro do vídeo não fecha
           >
             <video
               src={selectedVideo}
