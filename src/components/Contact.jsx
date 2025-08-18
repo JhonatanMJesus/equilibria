@@ -37,7 +37,7 @@ const Contact = () => {
               Quantidade de funcionários:*
             </label>
             <select id="funcionarios" name="funcionarios" required className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--azul-profundo)] bg-white text-sm md:text-base">
-              <option disabled hidden value="">Selecione uma opção</option>
+              <option disabled selected hidden value="">Selecione uma opção</option>
               <option value="autonomo">Autônomo</option>
               <option value="2-10">2-10</option>
               <option value="11-50">11-50</option>
