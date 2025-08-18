@@ -1,104 +1,94 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "https://equilibria-backend.onrender.com";
+const API_URL = "https://equilibria-backend-tmoo.onrender.com"; // ajuste para a URL do seu backend
 
 const Services = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [fadeIn, setFadeIn] = useState(false);
-  const [videoSelected, setVideoSelected] = useState(null);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const closeButtonRef = useRef(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_URL}/videos`)
-      .then(res => {
-        setVideos(res.data);
+    axios
+      .get(`${API_URL}/videos`)
+      .then((res) => {
+        const data = res.data;
+        // Se o backend retornar { videos: [...] }
+        // ou retornar um array puro [...]
+        const lista = Array.isArray(data) ? data : data.videos || [];
+        setVideos(lista);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Erro ao carregar vídeos:", err);
+        setVideos([]);
       })
       .finally(() => {
         setLoading(false);
       });
   }, []);
 
-  function openModal(video) {
-    setVideoSelected(video);
-    setModalOpen(true);
-    setTimeout(() => setFadeIn(true), 10);
-  }
-
-  function closeModal() {
-    setFadeIn(false);
-    setTimeout(() => {
-      setModalOpen(false);
-      setVideoSelected(null);
-    }, 300);
-  }
-
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape" && modalOpen) closeModal();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen]);
-
   return (
-    <section id="services" className="relative bg-gradient-to-b from-[var(--azul-serenity)] to-[var(--azul-profundo)] text-white">
-      <div className="container-default flex flex-col items-center justify-center gap-8 py-24 sm:py-32 px-6">
-        
+    <section className="relative w-full bg-gradient-to-b from-gray-900 to-black text-white py-12 px-4">
+      {/* Container */}
+      <div className="max-w-6xl mx-auto text-center">
         {/* Título */}
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-center drop-shadow-lg">
-          Nossa Galeria de Vídeos
-        </h1>
+        <h2 className="text-4xl font-bold mb-6 text-white drop-shadow-lg">
+          Serviços em Destaque
+        </h2>
+        <p className="text-lg text-gray-300 mb-10">
+          Confira alguns dos nossos serviços através de vídeos demonstrativos.
+        </p>
 
-        {/* Grid de vídeos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10 w-full max-w-6xl">
-          {loading ? (
-            <p className="text-lg font-medium">Carregando vídeos...</p>
-          ) : videos.length > 0 ? (
-            videos.map((video, idx) => (
-              <button
-                key={idx}
-                onClick={() => openModal(video)}
-                className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20 group"
+        {/* Área dos Vídeos */}
+        {loading ? (
+          <p className="text-gray-400">Carregando vídeos...</p>
+        ) : videos.length === 0 ? (
+          <p className="text-gray-400">Nenhum vídeo disponível no momento.</p>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {videos.map((video, index) => (
+              <div
+                key={index}
+                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:scale-105 transition-transform duration-300"
+                onClick={() => setSelectedVideo(video.url)}
               >
                 <video
                   src={video.url}
-                  className="w-full h-60 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out"
+                  className="w-full h-60 object-cover"
                   muted
+                  loop
+                  playsInline
+                  onMouseEnter={(e) => e.target.play()}
+                  onMouseLeave={(e) => e.target.pause()}
                 />
-                <div className="absolute inset-0 flex justify-center items-center bg-black/40 opacity-0 group-hover:opacity-100 transition">
-                  <div className="flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--azul-profundo)]" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            ))
-          ) : (
-            <p className="text-lg font-medium">Nenhum vídeo disponível no momento.</p>
-          )}
-        </div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Modal */}
-      {modalOpen && (
-        <div className={`fixed inset-0 flex justify-center items-center z-50 transition-opacity duration-300 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
-          <div className="absolute inset-0 bg-black/80" onClick={closeModal}></div>
-          <div className="bg-white rounded-2xl w-full max-w-3xl mx-4 p-4 relative z-10 shadow-2xl">
+      {/* Modal de Visualização */}
+      {selectedVideo && (
+        <div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <div className="relative w-full max-w-4xl px-4">
+            <video
+              src={selectedVideo}
+              controls
+              autoPlay
+              className="w-full rounded-xl shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
             <button
-              onClick={closeModal}
-              ref={closeButtonRef}
-              className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-3xl font-bold"
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg"
             >
-              &times;
+              Fechar
             </button>
-            <video src={videoSelected?.url} controls autoPlay className="w-full rounded-xl" />
           </div>
         </div>
       )}
