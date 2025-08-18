@@ -33,7 +33,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
+    <section className="w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-6 text-[var(--azul-profundo)] drop-shadow-lg">
           Serviços em Destaque
@@ -75,8 +75,7 @@ const Services = () => {
       {/* Modal */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
-          onClick={() => setSelectedVideo(null)} // clique fora fecha
+          className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4" onClick={() => setSelectedVideo(null)} // clique fora fecha
         >
           <div
             className="relative w-full h-full flex justify-center items-center"
