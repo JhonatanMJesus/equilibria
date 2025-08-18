@@ -28,22 +28,22 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-[var(--azul-profundo)] md:bg-gradient-to-r from-[var(--azul-profundo)] to-[var(--azul-serenity)] text-white py-12 px-4">
+    <section className="relative w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
       {/* Container */}
       <div className="max-w-6xl mx-auto text-center">
         {/* Título */}
-        <h2 className="text-4xl font-bold mb-6 text-white drop-shadow-lg">
+        <h2 className="text-4xl font-bold mb-6 text-[var(--azul-profundo)] drop-shadow-lg">
           Serviços em Destaque
         </h2>
-        <p className="text-lg text-gray-300 mb-10">
+        <p className="text-lg text-[var(--azul-profundo)] mb-10">
           Confira alguns dos nossos serviços através de vídeos demonstrativos.
         </p>
 
         {/* Área dos Vídeos */}
         {loading ? (
-          <p className="text-gray-400">Carregando vídeos...</p>
+          <p className="text-[var(--azul-profundo)]">Carregando vídeos...</p>
         ) : videos.length === 0 ? (
-          <p className="text-gray-400">Nenhum vídeo disponível no momento.</p>
+          <p className="text-[var(--azul-profundo)]">Nenhum vídeo disponível no momento.</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
             {videos.map((video, index) => (
