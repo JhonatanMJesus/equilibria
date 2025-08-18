@@ -72,15 +72,15 @@ const Services = () => {
       {/* Modal de Visualização */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedVideo(null)}
         >
-          <div className="relative w-full max-w-4xl mx-4">
+          <div className="relative w-full max-w-4xl">
             <video
               src={selectedVideo}
               controls
               autoPlay
-              className="w-full max-h-[80vh] rounded-xl shadow-lg object-contain"
+              className="w-full max-h-[80vh] max-w-full rounded-xl shadow-lg object-contain"
               onClick={(e) => e.stopPropagation()}
             />
             <button
