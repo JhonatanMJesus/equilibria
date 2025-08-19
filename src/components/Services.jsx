@@ -75,12 +75,12 @@ const Services = () => {
       {/* Modal */}
       {selectedVideo && (
         <div
-          className="inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 flex justify-center items-center z-100 p-4"
           onClick={() => setSelectedVideo(null)}
         >
           {/* Contêiner que envolve apenas o vídeo */}
           <div
-            className="relative max-w-full max-h-full rounded-xl shadow-lg"
+            className="max-w-full max-h-full rounded-xl shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <video
