@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { createPortal } from "react-dom";
 
 const API_URL = "https://equilibria-backend-tmoo.onrender.com";
 
@@ -31,6 +32,40 @@ const Services = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+
+
+  const VideoModal = () => (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4"
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 2147483647, // Valor máximo do z-index
+        isolation: 'isolate' // Cria um novo contexto de empilhamento
+      }}
+      onClick={() => setSelectedVideo(null)}
+    >
+      <div className="relative max-w-4xl max-h-full flex flex-col items-center">
+        <video
+          src={selectedVideo}
+          controls
+          autoPlay
+          className="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        />
+        <button
+          onClick={() => setSelectedVideo(null)}
+          className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg shadow-lg transition-colors duration-200 font-semibold"
+        >
+          Fechar Vídeo
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -74,37 +109,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Modal renderizado fora da section */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4"
-          style={{ 
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 99999
-          }}
-          onClick={() => setSelectedVideo(null)}
-        >
-          <div className="relative max-w-4xl max-h-full flex flex-col items-center">
-            <video
-              src={selectedVideo}
-              controls
-              autoPlay
-              className="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg shadow-lg transition-colors duration-200 font-semibold"
-            >
-              Fechar Vídeo
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Modal usando createPortal para renderizar no root */}
+      {selectedVideo && createPortal(<VideoModal />, document.body)}
     </>
   );
 };
