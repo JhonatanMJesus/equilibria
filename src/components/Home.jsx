@@ -20,7 +20,7 @@ const Home = () => {
             </p>
           </div>
           <div>
-            <a href='#contact' className='inline-block p-3 bg-[var(--verde-menta)] text-[var(--azul-profundo)] rounded-xl mt-4 text-base md:text-lg hover:bg-[var(--dourado-suave)] hover:text-white transition-colors duration-300'>
+            <a href='#contact' className='inline-block p-3 bg-[var(--azul-profundo)] text-[var(--cinza-neutro)] rounded-xl mt-4 text-base md:text-lg hover:bg-[var(--dourado-suave)] hover:text-white transition-colors duration-300'>
               Quero conhecer
             </a>
           </div>
