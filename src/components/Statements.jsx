@@ -41,7 +41,7 @@ const Statements = () => {
                 </p>
               </div>
               <div className="flex flex-col text-center sm:text-left">
-                <p className="text-[var(--cinza-escuro)] text-base leading-relaxed">{t.text}</p>
+                <p className="text-[var(--cinza-escuro)] text-base leading-relaxed">"{t.text}"</p>
               </div>
             </div>
           ))}
