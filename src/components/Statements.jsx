@@ -27,7 +27,7 @@ const Statements = () => {
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex items-start gap-6 hover:scale-105 transition-transform duration-300 w-full max-w-4xl"
+              className="bg-white rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 hover:scale-105 transition-transform duration-300 w-full max-w-4xl"
             >
               <div className="flex flex-col items-center flex-shrink-0">
                 <img
@@ -40,7 +40,7 @@ const Statements = () => {
                   {t.role} - {t.company}
                 </p>
               </div>
-              <div className="flex flex-col text-left">
+              <div className="flex flex-col text-center sm:text-left">
                 <p className="text-[var(--cinza-escuro)] text-base leading-relaxed">{t.text}</p>
               </div>
             </div>
