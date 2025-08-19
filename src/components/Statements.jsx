@@ -1,124 +1,54 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from 'react';
+import Statement1 from '../img/Alessandra.jpeg'
 
-const API_URL = "https://equilibria-backend-tmoo.onrender.com";
+const testimonials = [
+  {
+    id: 1,
+    name: "Alessandra Rampinelli",
+    role: "CEO",
+    company: "Papemax",
+    photo: "../img/Alessandra.jpeg",
+    text: "O treinamento de saúde mental na Papemax foi uma experiência transformadora para nossa equipe. Muitas vezes, o dia a dia de trabalho nos faz esquecer de olhar para nós mesmos, e o treinamento trouxe ferramentas práticas para lidar com o estresse, melhorar a comunicação e fortalecer o bem-estar. Percebi que, depois das atividades, os colaboradores ficaram mais engajados, motivados e abertos a conversar sobre suas dificuldades. Investir em saúde mental não é apenas cuidar do indivíduo, mas também fortalecer a empresa como um todo. Esse treinamento mostrou que, quando apoiamos uns aos outros, conseguimos crescer juntos."
+  }
+];
 
-const Services = () => {
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/videos`)
-      .then((res) => {
-        const data = res.data;
-        const lista = Array.isArray(data) ? data : data.videos || [];
-        setVideos(lista);
-      })
-      .catch((err) => {
-        console.error("Erro ao carregar vídeos:", err);
-        setVideos([]);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  // Fechar modal com ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") setSelectedVideo(null);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  // Prevenir scroll do body quando modal está aberto
-  useEffect(() => {
-    if (selectedVideo) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
-    // Cleanup
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedVideo]);
-
+const Statements = () => {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-6 text-[var(--azul-profundo)] drop-shadow-lg">
-          Serviços em Destaque
+    <section className="bg-[var(--cinza-neutro)] py-12">
+      <div className="container-default flex flex-col items-center gap-8">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--azul-profundo)]">
+          Depoimentos
         </h2>
-        <p className="text-lg text-[var(--azul-profundo)] mb-10">
-          Confira alguns dos nossos serviços através de vídeos demonstrativos.
+        <p className="text-center text-[var(--cinza-escuro)] max-w-2xl">
+          Veja o que líderes e profissionais dizem sobre a nossa consultoria e os resultados alcançados.
         </p>
 
-        {loading ? (
-          <p className="text-[var(--azul-profundo)]">Carregando vídeos...</p>
-        ) : videos.length === 0 ? (
-          <p className="text-[var(--azul-profundo)]">
-            Nenhum vídeo disponível no momento.
-          </p>
-        ) : (
-          <div className="grid md:grid-cols-3 gap-6">
-            {videos.map((video, index) => (
-              <div
-                key={index}
-                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:scale-105 transition-transform duration-300"
-                onClick={() => setSelectedVideo(video.url)}
-              >
-                <video
-                  src={video.url}
-                  className="w-full h-60 object-cover"
-                  muted
-                  loop
-                  playsInline
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => e.target.pause()}
+        <div className="flex flex-wrap justify-center gap-8 w-full mt-8">
+          {testimonials.map((t) => (
+            <div
+              key={t.id}
+              className="bg-white rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 hover:scale-105 transition-transform duration-300 w-full max-w-4xl"
+            >
+              <div className="flex flex-col items-center flex-shrink-0">
+                <img
+                  src={Statement1}
+                  alt={t.name}
+                  className="w-24 h-24 rounded-full object-cover mb-3"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
+                <h3 className="text-lg font-semibold text-[var(--azul-profundo)] text-center">{t.name}</h3>
+                <p className="text-[var(--dourado-suave)] text-sm text-center">
+                  {t.role} - {t.company}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Modal */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4"
-          style={{ zIndex: 9999 }}
-          onClick={() => setSelectedVideo(null)}
-        >
-          {/* Contêiner que envolve apenas o vídeo */}
-          <div
-            className="relative max-w-5xl max-h-full w-full h-full flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <video
-              src={selectedVideo}
-              controls
-              autoPlay
-              className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
-              style={{ maxHeight: '90vh', maxWidth: '90vw' }}
-            />
-          </div>
-
-          {/* Botão de fechar fora do contêiner do vídeo */}
-          <button
-            onClick={() => setSelectedVideo(null)}
-            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg z-50 transition-colors duration-200"
-            style={{ zIndex: 10000 }}
-          >
-            ✕
-          </button>
+              <div className="flex flex-col text-center sm:text-left">
+                <p className="text-[var(--cinza-escuro)] text-base leading-relaxed">{t.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </section>
   );
 };
 
-export default Services;
+export default Statements;

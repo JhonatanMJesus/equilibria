@@ -32,6 +32,20 @@ const Services = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Prevenir scroll do body quando modal está aberto
+  useEffect(() => {
+    if (selectedVideo) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedVideo]);
+
   return (
     <section className="relative w-full bg-gradient-to-br from-[var(--azul-serenity)] via-[var(--cinza-neutro)] to-[var(--azul-serenity)] text-[var(--azul-profundo)] py-12 px-4">
       <div className="max-w-6xl mx-auto text-center">
@@ -75,28 +89,31 @@ const Services = () => {
       {/* Modal */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 bg-black/50 flex justify-center items-center z-100 p-4"
+          className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4"
+          style={{ zIndex: 9999 }}
           onClick={() => setSelectedVideo(null)}
         >
           {/* Contêiner que envolve apenas o vídeo */}
           <div
-            className="max-w-full max-h-full rounded-xl shadow-lg"
+            className="relative max-w-5xl max-h-full w-full h-full flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <video
               src={selectedVideo}
               controls
               autoPlay
-              className="w-full h-full object-contain rounded-xl"
+              className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+              style={{ maxHeight: '90vh', maxWidth: '90vw' }}
             />
           </div>
 
           {/* Botão de fechar fora do contêiner do vídeo */}
           <button
             onClick={() => setSelectedVideo(null)}
-            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg z-10"
+            className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg z-50 transition-colors duration-200"
+            style={{ zIndex: 10000 }}
           >
-            Fechar
+            ✕
           </button>
         </div>
       )}
