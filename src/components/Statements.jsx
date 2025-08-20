@@ -1,5 +1,5 @@
 import React from 'react';
-import Statement1 from '../img/Alessandra.jpeg'
+import Statement1 from '../img/Alessandra.jpg'
 
 const testimonials = [
   {
