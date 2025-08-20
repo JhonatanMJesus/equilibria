@@ -12,7 +12,7 @@ const Explain = () => {
   const tabData = {
     palestras: {
       title: 'Melhor desempenho e qualidade de vida!',
-      description: 'Transformamos ambientes corporativos através de palestras inspiradoras que conectam bem-estar pessoal com alta performance profissional. Nossos especialistas abordam temas como liderança equilibrada, gestão do estresse, produtividade saudável e desenvolvimento de equipes de alto desempenho.',
+      description: 'Transformamos ambientes corporativos através de palestras e treinamentos que conectam bem-estar pessoal com alta performance profissional. Nossos especialistas abordam temas como liderança equilibrada, gestão do estresse, produtividade saudável e desenvolvimento de equipes de alto desempenho.',
       buttonText: 'Conheça nossas palestras',
       image: 'https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' // Imagem de palestra
     },
