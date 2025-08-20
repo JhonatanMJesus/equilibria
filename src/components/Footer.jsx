@@ -5,7 +5,7 @@ function Footer() {
         <p className="text-sm mb-3">Siga-nos</p>
         <div className="flex justify-center gap-4">
           <a 
-            href="https://www.instagram.com/andrezabergamoanalista" target="_blank"
+            href="https://www.instagram.com/equilibriasolucoes" target="_blank"
             className="hover:opacity-80 transition-opacity"
             aria-label="Instagram"
           >
