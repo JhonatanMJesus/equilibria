@@ -13,26 +13,23 @@ const Painel = () => {
   const [previews, setPreviews] = useState([null, null, null]);
   const [selectedFiles, setSelectedFiles] = useState([null, null, null]);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState({});
 
   // Busca vídeos atuais do backend
   const fetchVideos = async () => {
     try {
-      // Removido o header Authorization - agora é público
       const res = await axios.get(`${API_URL}/videos`);
       setVideos(res.data.videos || [null, null, null]);
     } catch (error) {
       console.error("Erro ao buscar vídeos:", error);
-      // Se der erro, mantém o estado atual
       setVideos([null, null, null]);
     }
   };
 
-  // Busca vídeos na inicialização (sempre, mesmo sem token)
   useEffect(() => {
     fetchVideos();
   }, []);
 
-  // Busca novamente quando fizer login
   useEffect(() => {
     if (token) {
       fetchVideos();
@@ -47,7 +44,7 @@ const Painel = () => {
       localStorage.setItem("token", res.data.token);
       setToken(res.data.token);
       alert("Login bem-sucedido!");
-      await fetchVideos(); // Recarrega vídeos após login
+      await fetchVideos();
     } catch (error) {
       alert("Erro no login. Verifique as credenciais.");
       console.error(error);
@@ -64,6 +61,66 @@ const Painel = () => {
     setSelectedFiles([null, null, null]);
   };
 
+  // Upload direto para Cloudinary
+  const uploadToCloudinary = async (file, index) => {
+    try {
+      // 1. Solicitar assinatura do backend
+      const signatureResponse = await axios.post(
+        `${API_URL}/upload-signature`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const { signature, timestamp, cloudName, apiKey, folder } = signatureResponse.data;
+
+      // 2. Preparar FormData para upload direto
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('signature', signature);
+      formData.append('timestamp', timestamp);
+      formData.append('api_key', apiKey);
+      formData.append('folder', folder);
+
+      // 3. Upload direto para Cloudinary
+      console.log(`Iniciando upload do vídeo ${index + 1}...`);
+      
+      const uploadResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(prev => ({
+              ...prev,
+              [index]: percentCompleted
+            }));
+          }
+        }
+      );
+
+      console.log(`Upload concluído para vídeo ${index + 1}`);
+
+      // 4. Salvar informações no backend
+      const saveResponse = await axios.post(
+        `${API_URL}/videos/save`,
+        {
+          index: index,
+          url: uploadResponse.data.secure_url,
+          public_id: uploadResponse.data.public_id
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      return saveResponse.data.videos;
+
+    } catch (error) {
+      console.error(`Erro no upload do vídeo ${index + 1}:`, error);
+      throw error;
+    }
+  };
+
   const handleUpload = async () => {
     const filesToSend = selectedFiles
       .map((f, i) => f ? { file: f, index: i } : null)
@@ -74,27 +131,17 @@ const Painel = () => {
       return;
     }
 
-    const formData = new FormData();
-    const indices = [];
-    filesToSend.forEach(({ file, index }) => {
-      formData.append("videos", file);
-      indices.push(index);
-    });
-    formData.append("indices", JSON.stringify(indices));
+    setLoading(true);
+    setUploadProgress({});
 
     try {
-      setLoading(true);
-      const res = await axios.post(`${API_URL}/videos`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      
+      // Fazer upload de cada vídeo sequencialmente
+      for (const { file, index } of filesToSend) {
+        const updatedVideos = await uploadToCloudinary(file, index);
+        setVideos(updatedVideos);
+      }
+
       alert("Vídeo(s) enviado(s) com sucesso!");
-      
-      // Atualiza o estado com os vídeos retornados
-      setVideos(res.data.videos || [null, null, null]);
       
       // Limpa previews e arquivos selecionados
       setPreviews([null, null, null]);
@@ -106,10 +153,11 @@ const Painel = () => {
         alert("Sessão expirada. Faça login novamente.");
         handleLogout();
       } else {
-        alert("Erro ao enviar vídeo(s). Tente novamente.");
+        alert(`Erro ao enviar vídeo(s): ${err.message || 'Tente novamente.'}`);
       }
     } finally {
       setLoading(false);
+      setUploadProgress({});
     }
   };
 
@@ -207,6 +255,12 @@ const Painel = () => {
                   const file = e.target.files[0];
                   if (!file) return;
 
+                  // Validar tamanho (máximo 100MB)
+                  if (file.size > 100 * 1024 * 1024) {
+                    alert('Arquivo muito grande! Máximo: 100MB');
+                    return;
+                  }
+
                   const newSelected = [...selectedFiles];
                   newSelected[idx] = file;
                   setSelectedFiles(newSelected);
@@ -224,6 +278,21 @@ const Painel = () => {
               <p className="text-sm text-gray-500 mt-2 truncate">
                 {selectedFiles[idx].name}
               </p>
+            )}
+
+            {/* Barra de progresso */}
+            {uploadProgress[idx] !== undefined && (
+              <div className="mt-3">
+                <div className="bg-gray-200 rounded-full h-3">
+                  <div
+                    className="bg-indigo-600 h-3 rounded-full transition-all duration-300"
+                    style={{ width: `${uploadProgress[idx]}%` }}
+                  />
+                </div>
+                <p className="text-center text-sm mt-1 text-gray-600">
+                  {uploadProgress[idx]}%
+                </p>
+              </div>
             )}
           </div>
         ))}
@@ -243,6 +312,17 @@ const Painel = () => {
           </button>
         </div>
       </div>
+
+      {/* Modal de carregamento */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+            <p className="text-lg font-semibold text-gray-700">Enviando vídeo...</p>
+            <p className="text-sm text-gray-600">Por favor, aguarde. Não feche esta página.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
